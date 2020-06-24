@@ -1,0 +1,20 @@
+name: reset gh-pages
+
+on:
+  schedule:
+    - cron: "00 17 * * *" # everyday 2AM JST
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+      - name: reset gh-pages
+        run: |
+          cd $GITHUB_WORKSPACE
+          git fetch
+          git reset --hard 3250e5ea3d639c5d295a661de937fc96cd049fec
+          git push origin gh-pages -f
